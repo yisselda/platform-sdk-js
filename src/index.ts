@@ -302,7 +302,7 @@ export class CreolePlatformSDK {
     return {
       sendAudioChunk: (audioChunk: ArrayBuffer) => {
         if (ws.readyState === WebSocket.OPEN) {
-          const base64 = btoa(String.fromCharCode(...new Uint8Array(audioChunk)));
+          const base64 = btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(audioChunk))));
           ws.send(JSON.stringify({
             type: 'audio_chunk',
             data: base64
