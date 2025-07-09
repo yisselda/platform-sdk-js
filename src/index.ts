@@ -123,7 +123,7 @@ export class CreolePlatformSDK {
     } catch (error) {
       clearTimeout(timeoutId);
       
-      if (retries > 0 && error.name !== 'AbortError') {
+      if (retries > 0 && error instanceof Error && error.name !== 'AbortError') {
         await new Promise(resolve => setTimeout(resolve, 1000));
         return this.apiCall<T>(url, options, retries - 1);
       }
